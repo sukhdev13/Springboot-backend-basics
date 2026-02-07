@@ -1,19 +1,23 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class User {
 
     @Id
+    @Column(name = "User_Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "User Id")
     private Long id;
 
-    @Column(name = "User Name")
+    @Column(name = "User_Name")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @Column(name = "User Email")
+    @Column(name = "User_Email")
+    @Email(message = "Invalid email format")
     private String email;
 
     public Long getId() {
