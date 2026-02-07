@@ -28,4 +28,21 @@ public class UserServiceImpl implements UserService {
     public User getUser(Long id) {
         return userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
     }
+
+    @Override
+    public User updateUser(Long id, User user) {
+        User user1=userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
+        user1.setName(user.getName());
+        user1.setEmail(user.getEmail());
+        return userRepository.save(user1);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+//        User user=userRepository.findById(id).orElseThrow(()->new RuntimeException());
+        if(!userRepository.existsById(id)){
+            throw new RuntimeException("user not found");
+        }
+        userRepository.deleteById(id);
+    }
 }
